@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metagdb.local/schemas/design-vector-v1.json",
+  "title": "metaGDB finalized design vector d",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "candidate", "language", "schema", "storage",
+    "transactions", "execution", "algorithms", "capabilities", "quality",
+    "performance", "boundaries", "budget"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["crate_name", "description"],
+      "properties": {
+        "crate_name": {"type": "string", "pattern": "^metagdb_[a-z0-9_]+$"},
+        "description": {"type": "string", "minLength": 1}
+      }
+    },
+    "language": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "grammar_path"],
+      "properties": {
+        "name": {"enum": ["Cypher", "GQL", "Gremlin"]},
+        "grammar_path": {"type": "string", "pattern": "\\.g4$"}
+      }
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "vertex_labels", "edge_types", "property_keys"],
+      "properties": {
+        "mode": {"enum": ["strict", "hybrid", "schemaless"]},
+        "vertex_labels": {"$ref": "#/$defs/uniqueStrings"},
+        "edge_types": {"$ref": "#/$defs/uniqueStrings"},
+        "property_keys": {"$ref": "#/$defs/uniqueStrings"}
+      }
+    },
+    "storage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["medium", "layout", "indexes", "persistence", "recovery"],
+      "properties": {
+        "medium": {"type": "string", "minLength": 1},
+        "layout": {"type": "string", "minLength": 1},
+        "indexes": {"$ref": "#/$defs/uniqueStrings"},
+        "persistence": {"type": "string", "minLength": 1},
+        "recovery": {"type": "string", "minLength": 1}
+      }
+    },
+    "transactions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["atomicity_scope", "concurrency_control", "isolation_level", "durability"],
+      "properties": {
+        "atomicity_scope": {"const": "multi_operation_transaction"},
+        "concurrency_control": {"enum": ["mvcc", "2pl", "occ", "single_writer"]},
+        "isolation_level": {"enum": ["read_committed", "repeatable_read", "snapshot_isolation", "serializable"]},
+        "durability": {"const": "crash_safe"}
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model"],
+      "properties": {
+        "model": {"enum": ["volcano", "vectorized", "push_based"]}
+      }
+    },
+    "algorithms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required"],
+      "properties": {
+        "required": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "oneOf": [
+              {"type": "string", "minLength": 1, "description": "Legacy shorthand."},
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["name", "description"],
+                "properties": {
+                  "name": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$"},
+                  "description": {"type": "string", "minLength": 1},
+                  "performance_weight": {"type": "number", "minimum": 0}
+                }
+              }
+            ]
+          },
+          "description": "Open user-defined algorithms. Object entries are preferred; names are not restricted to a framework catalog."
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "optional", "unsupported_behavior"],
+      "properties": {
+        "required": {"$ref": "#/$defs/uniqueStrings"},
+        "optional": {"$ref": "#/$defs/uniqueStrings"},
+        "unsupported_behavior": {"type": "string", "minLength": 1}
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["benchmark_min_pass_rate", "system_benchmark_required", "required_tests", "zero_compiler_warnings"],
+      "properties": {
+        "benchmark_min_pass_rate": {"type": "number", "minimum": 0.9, "maximum": 1},
+        "system_benchmark_required": {"const": true},
+        "required_tests": {"$ref": "#/$defs/uniqueStrings"},
+        "zero_compiler_warnings": {"type": "boolean"}
+      }
+    },
+    "performance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "threads", "datasets", "dataset_weights", "cache_modes", "repeat", "workload", "primary_metrics", "guardrails", "absolute_targets", "max_optimization_iterations", "no_improvement_patience"],
+      "properties": {
+        "profile": {"enum": ["point_read_optimized", "traversal_optimized", "scan_analytics", "write_optimized", "recovery_optimized", "balanced", "custom"]},
+        "threads": {"const": 1},
+        "datasets": {"allOf": [{"$ref": "#/$defs/uniqueStrings"}], "minItems": 1},
+        "dataset_weights": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "number", "minimum": 0},
+          "description": "Relative importance of each selected graph scenario; keys must exactly match datasets and values must sum to 1."
+        },
+        "cache_modes": {"type": "array", "uniqueItems": true, "minItems": 1, "items": {"enum": ["warm", "reopen"]}},
+        "repeat": {"type": "integer", "minimum": 3, "maximum": 20},
+        "max_optimization_iterations": {"type": "integer", "minimum": 1},
+        "no_improvement_patience": {"type": "integer", "minimum": 1},
+        "topology_downside_penalty": {
+          "type": "number", "minimum": 0,
+          "description": "Penalty lambda for whole-graph-scenario regressions in the topology-robust log gain. Omitted legacy vectors use 0; new generated vectors use 1."
+        },
+        "workload": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["storage_import", "storage_vertex_point_read", "storage_edge_point_read", "storage_out_adjacency", "storage_hotspot_out_adjacency", "storage_scan", "storage_reopen", "storage_disk_size", "query_point_read", "query_one_hop", "transaction_commit", "algorithm_projection_build", "algorithm_kernel", "algorithm_e2e"],
+          "properties": {
+            "storage_import": {"type": "number", "minimum": 0},
+            "storage_vertex_point_read": {"type": "number", "minimum": 0},
+            "storage_edge_point_read": {"type": "number", "minimum": 0},
+            "storage_out_adjacency": {"type": "number", "minimum": 0},
+            "storage_hotspot_out_adjacency": {"type": "number", "minimum": 0},
+            "storage_scan": {"type": "number", "minimum": 0},
+            "storage_reopen": {"type": "number", "minimum": 0},
+            "storage_disk_size": {"type": "number", "minimum": 0},
+            "query_point_read": {"type": "number", "minimum": 0},
+            "query_one_hop": {"type": "number", "minimum": 0},
+            "transaction_commit": {"type": "number", "minimum": 0},
+            "algorithm_projection_build": {"type": "number", "minimum": 0},
+            "algorithm_kernel": {"type": "number", "minimum": 0},
+            "algorithm_e2e": {"type": "number", "minimum": 0}
+          }
+        },
+        "primary_metrics": {"allOf": [{"$ref": "#/$defs/uniqueStrings"}], "minItems": 1},
+        "guardrails": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["other_latency_regression_max", "disk_size_regression_max", "reopen_time_regression_max", "minimum_primary_improvement"],
+          "properties": {
+            "other_latency_regression_max": {
+              "type": "number", "minimum": 1,
+              "description": "Legacy spelling of weighted_latency_regression_max; it now caps metrics with a nonzero workload weight instead of every metric in the report."
+            },
+            "disk_size_regression_max": {
+              "type": "number", "minimum": 1,
+              "description": "Protected metric: the on-disk footprint may not grow past this factor."
+            },
+            "reopen_time_regression_max": {
+              "type": "number", "minimum": 1,
+              "description": "Protected metric: reopen time may not grow past this factor."
+            },
+            "minimum_primary_improvement": {"type": "number", "minimum": 0},
+            "weighted_latency_regression_max": {
+              "type": "number", "minimum": 1,
+              "description": "Catastrophe bound for weighted latency metrics (default 2.0). The comparator raises it to the metric's measured same-code noise floor whenever the environment cannot resolve the difference, so it is not a noise discriminator."
+            },
+            "unweighted_latency_regression_max": {
+              "type": "number", "minimum": 1,
+              "description": "Catastrophe bound for metrics the design scores at weight zero (default 5.0). Such a metric cannot veto the experiment it does not participate in."
+            },
+            "minimum_overall_ratio": {
+              "type": "number", "minimum": 0,
+              "description": "The weighted geometric mean over scored metrics may not fall below this (default 1.0): a local win may not pay for a net loss across the workload the design declared."
+            },
+            "minimum_topology_robust_gain": {
+              "type": "number", "minimum": 0,
+              "description": "Minimum weighted log gain after the graph-scenario downside penalty (default 0); checked when explicitly present or when the penalty is positive."
+            }
+          }
+        },
+        "absolute_targets": {"type": "object", "additionalProperties": {"type": "number", "exclusiveMinimum": 0}}
+      }
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allow_framework_changes", "allow_benchmark_changes", "allow_grammar_changes"],
+      "properties": {
+        "allow_framework_changes": {"const": false},
+        "allow_benchmark_changes": {"const": false},
+        "allow_grammar_changes": {"const": false}
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_fix_iterations"],
+      "properties": {
+        "max_fix_iterations": {
+          "type": "integer", "minimum": 0,
+          "description": "0 means no iteration limit; stop only at completion or a concrete environmental blocker."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "uniqueStrings": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

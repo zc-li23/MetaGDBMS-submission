@@ -1,0 +1,2 @@
+Build a Gremlin social graph system with dynamic properties and labels. Multi-hop traversal and adjacency queries must be fast.
+The system must provide crash recovery and preserve committed data. Use snapshot isolation.

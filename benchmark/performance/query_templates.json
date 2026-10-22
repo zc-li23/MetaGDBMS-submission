@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "languages": {
+    "Cypher": {
+      "point_read": "MATCH (n) WHERE id(n) = {source_id} RETURN n",
+      "one_hop": "MATCH (a)-[e]->(b) WHERE id(a) = {source_id} RETURN b"
+    },
+    "GQL": {
+      "point_read": "MATCH (n) WHERE ELEMENT_ID(n) = {source_id} RETURN n",
+      "one_hop": "MATCH (a)-[e]->(b) WHERE ELEMENT_ID(a) = {source_id} RETURN b"
+    },
+    "Gremlin": {
+      "point_read": "g.V({source_id})",
+      "one_hop": "g.V({source_id}).out()"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "phase": "12_benchmark_fix",
+  "decision": "revisit",
+  "target": "02_storage",
+  "observations": [
+    "Name the failed integration or performance check and the exact symptom."
+  ],
+  "self_assessment": "Explain why the agent selected this earlier owner and which current-stage requirement exposed the mismatch.",
+  "diagnosis": "Describe the root cause and the affected cross-layer contract.",
+  "remaining_risks": [
+    "The repaired component and all dependent stages must pass fresh checks."
+  ],
+  "next_action": "Repair the selected component and rerun invalidated consumers."
+}

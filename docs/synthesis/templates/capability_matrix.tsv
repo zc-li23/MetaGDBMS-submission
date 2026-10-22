@@ -1,0 +1,6 @@
+requirement	priority	owner_component	test_or_benchmark_case	status	evidence
+{{LANGUAGE}} grammar and executable semantics	required	parser/planner/executor	benchmark/{{LANGUAGE_LOWER}}	pending	not-run
+framework public contract	required	assembly	python3 scripts/build.py verify {{CRATE_NAME}}	pending	not-run
+ACID and graph consistency	required	transactions/storage	benchmark/system	pending	not-run
+required algorithm registration	required	projection/algorithms	benchmark/system G01	pending	not-run
+required algorithm semantics	required	algorithms/query pipeline	algorithm-check core + language	pending	not-run

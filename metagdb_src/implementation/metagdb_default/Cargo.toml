@@ -1,0 +1,13 @@
+[package]
+name = "metagdb_default"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "metaGDB minimal default backend implementation: fills the implementation slots of the metagdb_core contract"
+
+[dependencies]
+metagdb_core = { workspace = true }
+metagdb_cypher_antlr = { workspace = true }
+antlr4rust = "0.5.2"

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "datasets": {
+    "uniform_smoke": {
+      "kind": "generated_regular",
+      "topology": "uniform_regular",
+      "path": "data/raw/uniform_smoke.graph",
+      "profiles": ["smoke", "standard", "paper"],
+      "vertices": 1000,
+      "degree": 8,
+      "labels": 4,
+      "communities": 32,
+      "seed": 20260918
+    },
+    "uniform_standard": {
+      "kind": "generated_regular",
+      "topology": "uniform_regular",
+      "path": "data/raw/uniform_standard.graph",
+      "profiles": ["standard", "paper"],
+      "vertices": 10000,
+      "degree": 16,
+      "labels": 8,
+      "communities": 128,
+      "seed": 20260918
+    },
+    "uniform_large": {
+      "kind": "generated_regular",
+      "topology": "uniform_regular",
+      "path": "data/raw/uniform_large.graph",
+      "profiles": ["paper"],
+      "vertices": 100000,
+      "degree": 16,
+      "labels": 16,
+      "communities": 512,
+      "seed": 20260918
+    },
+    "rn": {
+      "kind": "local_real",
+      "topology": "sparse_road",
+      "path": "data/raw/rn.graph",
+      "profiles": ["paper"],
+      "description": "Pennsylvania road network; sparse bounded-degree graph",
+      "vertices": 1090920,
+      "edges": 3083796,
+      "sha256": "1e3961ca648822515741adb1ed22f1ce1b5e5709e1b2f202c471c5699094e43c"
+    },
+    "yt": {
+      "kind": "local_real",
+      "topology": "power_law_social",
+      "path": "data/raw/yt.graph",
+      "profiles": ["paper"],
+      "description": "social network; highly skewed degree distribution",
+      "vertices": 1157828,
+      "edges": 2987624,
+      "sha256": "a36272a38d522fd5a1a63d7aae15dd60951b9fe42c6804b31d693d452f802bd3"
+    }
+  }
+}

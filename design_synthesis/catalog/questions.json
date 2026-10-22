@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "questions": [
+    {
+      "dimension": "schema",
+      "prompt": "Must vertex labels, edge types, and properties be declared before inserting data?",
+      "options": {
+        "strict": "Require declared schema",
+        "hybrid": "Declare core fields and allow extensions",
+        "schemaless": "Allow dynamic labels and properties"
+      },
+      "burden": 1.0
+    },
+    {
+      "dimension": "isolation",
+      "prompt": "What isolation level is required for concurrent transactions?",
+      "options": {
+        "read_committed": "Prevent dirty reads",
+        "repeatable_read": "Keep repeated reads stable within a transaction",
+        "snapshot_isolation": "Read from a consistent snapshot and detect write conflicts",
+        "serializable": "Produce results equivalent to serial execution"
+      },
+      "burden": 1.4
+    },
+    {
+      "dimension": "execution",
+      "prompt": "Which query workload is most important?",
+      "options": {
+        "volcano": "Point lookups and short queries",
+        "vectorized": "Bulk scans and aggregation",
+        "push_based": "Continuous traversal and graph analytics"
+      },
+      "burden": 1.0
+    },
+    {
+      "dimension": "storage_layout",
+      "prompt": "Which access pattern should storage prioritize?",
+      "options": {
+        "slotted_pages": "Random point reads and writes",
+        "append_segments": "Sequential writes and recovery",
+        "adjacency_records": "Adjacency traversal",
+        "csr_delta": "Large scans and graph analytics"
+      },
+      "burden": 1.2
+    },
+    {
+      "dimension": "recovery",
+      "prompt": "Which recovery strategy is preferred?",
+      "options": {
+        "wal": "Log based recovery",
+        "cow": "Copy on write with checkpoints"
+      },
+      "burden": 1.5
+    }
+  ]
+}

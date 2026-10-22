@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "id": "lang_gremlin",
+      "patterns": [
+        "gremlin"
+      ],
+      "field": "language.name",
+      "value": "Gremlin"
+    },
+    {
+      "id": "lang_cypher",
+      "patterns": [
+        "cypher",
+        "open\\s*cypher"
+      ],
+      "field": "language.name",
+      "value": "Cypher"
+    },
+    {
+      "id": "lang_gql",
+      "patterns": [
+        "\\bgql\\b",
+        "graph query language"
+      ],
+      "field": "language.name",
+      "value": "GQL"
+    },
+    {
+      "id": "schema_strict",
+      "patterns": [
+        "strict schema",
+        "pre[- ]?defined schema",
+        "pre[- ]?declared (?:labels|types|properties)",
+        "schema must be defined"
+      ],
+      "field": "schema.mode",
+      "value": "strict"
+    },
+    {
+      "id": "schema_free",
+      "patterns": [
+        "schemaless",
+        "dynamic (?:labels|properties|attributes)",
+        "open property graph",
+        "without (?:predefined |pre-declared )?schema",
+        "without schema ddl",
+        "no schema ddl"
+      ],
+      "field": "schema.mode",
+      "value": "schemaless"
+    },
+    {
+      "id": "schema_hybrid",
+      "patterns": [
+        "hybrid schema"
+      ],
+      "field": "schema.mode",
+      "value": "hybrid"
+    },
+    {
+      "id": "topology_social",
+      "patterns": [
+        "social graph",
+        "power[- ]?law"
+      ],
+      "field": "graph.topology",
+      "value": "power_law_social"
+    },
+    {
+      "id": "topology_rail",
+      "patterns": [
+        "railway",
+        "sparse.*network"
+      ],
+      "field": "graph.topology",
+      "value": "sparse_railway"
+    },
+    {
+      "id": "topology_uniform",
+      "patterns": [
+        "uniform graph",
+        "regular graph"
+      ],
+      "field": "graph.topology",
+      "value": "uniform_regular"
+    },
+    {
+      "id": "point_read",
+      "patterns": [
+        "point (?:query|read|lookup)"
+      ],
+      "field": "objective.point_read",
+      "value": "high"
+    },
+    {
+      "id": "traversal",
+      "patterns": [
+        "traversal",
+        "neighbou?r"
+      ],
+      "field": "objective.traversal",
+      "value": "high"
+    },
+    {
+      "id": "scan",
+      "patterns": [
+        "scan analytics",
+        "aggregation",
+        "full graph scan",
+        "sequential scan",
+        "bulk scan"
+      ],
+      "field": "objective.scan",
+      "value": "high"
+    },
+    {
+      "id": "write",
+      "patterns": [
+        "write[- ]?intensive",
+        "ingest",
+        "update[- ]?intensive",
+        "intensive (?:graph )?updates",
+        "edge (?:insertions|deletions)",
+        "high update"
+      ],
+      "field": "objective.write",
+      "value": "high"
+    },
+    {
+      "id": "analytics",
+      "patterns": [
+        "olap",
+        "pagerank",
+        "wcc",
+        "cdlp"
+      ],
+      "field": "objective.analytics",
+      "value": "high"
+    },
+    {
+      "id": "recovery",
+      "patterns": [
+        "crash[- ]?safe",
+        "durab"
+      ],
+      "field": "objective.recovery",
+      "value": "high"
+    },
+    {
+      "id": "serializable",
+      "patterns": [
+        "serializable"
+      ],
+      "field": "correctness.isolation_level",
+      "value": "serializable"
+    },
+    {
+      "id": "snapshot",
+      "patterns": [
+        "snapshot isolation"
+      ],
+      "field": "correctness.isolation_level",
+      "value": "snapshot_isolation"
+    },
+    {
+      "id": "repeatable",
+      "patterns": [
+        "repeatable read"
+      ],
+      "field": "correctness.isolation_level",
+      "value": "repeatable_read"
+    },
+    {
+      "id": "read_committed",
+      "patterns": [
+        "read committed"
+      ],
+      "field": "correctness.isolation_level",
+      "value": "read_committed"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "": "https://metagdb.local/schemas/requirements-v1.json",
+  "title": "MetaGDB user requirement input",
+  "type": "object",
+  "required": [
+    "candidate",
+    "language"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "candidate": {
+      "type": "object",
+      "required": [
+        "crate_name"
+      ],
+      "properties": {
+        "crate_name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "language": {
+      "oneOf": [
+        {
+          "enum": [
+            "Cypher",
+            "GQL",
+            "Gremlin"
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "name"
+          ],
+          "properties": {
+            "name": {
+              "enum": [
+                "Cypher",
+                "GQL",
+                "Gremlin"
+              ]
+            },
+            "grammar_path": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "schema": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "enum": [
+            "strict",
+            "hybrid",
+            "schemaless"
+          ]
+        },
+        "vertex_labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "edge_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "property_keys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "graph": {
+      "type": "object"
+    },
+    "workload": {
+      "type": "object"
+    },
+    "correctness": {
+      "type": "object"
+    },
+    "preferences": {
+      "type": "object"
+    },
+    "algorithms": {
+      "type": "array"
+    },
+    "capabilities": {
+      "type": "object"
+    },
+    "storage": {
+      "type": "object",
+      "properties": {
+        "required_capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "preferred_components": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "custom_components": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "required_components": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
