@@ -1,0 +1,176 @@
+{
+  "profile": "metagdb-core-language-profile",
+  "version": "2.0",
+  "language": "gql",
+  "cases": 287,
+  "scored_cases": 287,
+  "negative_cases": 10,
+  "postcondition_cases": 21,
+  "cases_with_setup": 0,
+  "query_templates": 263,
+  "exact_duplicate_queries": 0,
+  "repeated_templates": 15,
+  "largest_template_group": 3,
+  "category_distribution": {
+    "error": 10,
+    "mutation.create": 5,
+    "mutation.delete": 3,
+    "mutation.postcondition": 6,
+    "mutation.update": 7,
+    "read.access": 27,
+    "read.aggregation": 30,
+    "read.collection": 8,
+    "read.composition": 25,
+    "read.filter": 26,
+    "read.function": 30,
+    "read.navigation": 36,
+    "read.ordering": 24,
+    "read.path": 20,
+    "read.projection": 30
+  },
+  "feature_count": 76,
+  "feature_distribution": {
+    "agg.avg": 4,
+    "agg.collect": 8,
+    "agg.count": 40,
+    "agg.grouping": 10,
+    "agg.max": 3,
+    "agg.min": 4,
+    "agg.sum": 9,
+    "clause.delete": 6,
+    "clause.except": 1,
+    "clause.filter": 26,
+    "clause.for": 16,
+    "clause.insert": 7,
+    "clause.intersect": 1,
+    "clause.let": 11,
+    "clause.limit": 9,
+    "clause.match": 7,
+    "clause.offset": 5,
+    "clause.orderBy": 25,
+    "clause.remove": 1,
+    "clause.return": 1,
+    "clause.set": 9,
+    "clause.union": 4,
+    "clause.where": 6,
+    "expression.arithmetic": 11,
+    "expression.case": 2,
+    "expression.comparison": 2,
+    "expression.listConcat": 2,
+    "expression.listLiteral": 2,
+    "expression.mapLiteral": 1,
+    "function.abs": 3,
+    "function.btrim": 1,
+    "function.cast": 6,
+    "function.ceil": 2,
+    "function.charLength": 6,
+    "function.coalesce": 3,
+    "function.elementId": 1,
+    "function.floor": 1,
+    "function.left": 2,
+    "function.lower": 3,
+    "function.ltrim": 1,
+    "function.mod": 2,
+    "function.nullif": 1,
+    "function.octetLength": 1,
+    "function.pathLength": 1,
+    "function.power": 2,
+    "function.right": 2,
+    "function.rtrim": 1,
+    "function.sqrt": 1,
+    "function.trim": 1,
+    "function.upper": 5,
+    "operator.and": 6,
+    "operator.eq": 1,
+    "operator.ge": 1,
+    "operator.gt": 1,
+    "operator.le": 1,
+    "operator.lt": 1,
+    "operator.ne": 1,
+    "operator.not": 4,
+    "operator.or": 1,
+    "pattern.anyShortest": 5,
+    "pattern.directedIn": 6,
+    "pattern.directedOut": 11,
+    "pattern.inlineWhere": 3,
+    "pattern.labelConjunction": 1,
+    "pattern.multiHop": 9,
+    "pattern.propertySpec": 5,
+    "pattern.quantifiedPath": 17,
+    "pattern.relationship": 1,
+    "pattern.relationshipType": 7,
+    "pattern.relationshipVariable": 4,
+    "predicate.labeled": 7,
+    "predicate.null": 5,
+    "predicate.propertyExists": 2,
+    "projection.alias": 6,
+    "projection.distinct": 8,
+    "projection.property": 11
+  },
+  "source_distribution": {
+    "project": 287
+  },
+  "fixture_distribution": {
+    "empty": 10,
+    "social9": 277
+  },
+  "categories": {
+    "read.access": [
+      "V/E sources, label, id and property access"
+    ],
+    "read.filter": [
+      "predicates, boolean composition, null handling"
+    ],
+    "read.navigation": [
+      "edge traversal in both directions and multi-hop"
+    ],
+    "read.projection": [
+      "value shaping, maps, property elements"
+    ],
+    "read.aggregation": [
+      "count/sum/min/max/mean/group and DISTINCT"
+    ],
+    "read.ordering": [
+      "ordering, pagination, dedup and range selection"
+    ],
+    "read.path": [
+      "path values, path predicates and variable-length walks"
+    ],
+    "read.composition": [
+      "UNION/UNWIND/WITH/union/branch step composition"
+    ],
+    "read.collection": [
+      "fold/unfold/collect and list manipulation"
+    ],
+    "read.function": [
+      "string, numeric, list and type conversion functions"
+    ],
+    "read.advanced.temporal": [
+      "date/time/duration values (advanced capability)"
+    ],
+    "read.advanced.quantifier": [
+      "quantified path patterns (advanced capability)"
+    ],
+    "mutation.create": [
+      "node/vertex and relationship/edge creation"
+    ],
+    "mutation.update": [
+      "property and label modification"
+    ],
+    "mutation.delete": [
+      "element and property removal"
+    ],
+    "mutation.merge": [
+      "upsert / merge semantics"
+    ],
+    "mutation.postcondition": [
+      "mutation verified through a follow-up read"
+    ],
+    "error": [
+      "statements that must be rejected with a specific failure class"
+    ],
+    "olap.algorithm": [
+      "language-level entry point of a registered OLAP algorithm"
+    ]
+  }
+}

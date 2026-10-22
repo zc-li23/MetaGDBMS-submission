@@ -1,0 +1,26 @@
+# {{IMPL_CRATE}}
+
+Agent-generated metaGDB candidate for **{{LANGUAGE}}**.
+
+If this candidate contains `.synthesis/state.json`, start at
+`docs/synthesis/README.md`, run `python3 scripts/synthesis.py status {{IMPL_CRATE}}`,
+and follow the active phase. Otherwise implement the public contract in
+`docs/implementation_contract.md`. Keep all candidate-specific code in this
+directory and validate from the repository root:
+
+The selected `.g4` is already compiled into the configured ANTLR dependency in
+this crate. Keep that dependency and use its generated lexer/parser as the runtime
+syntax frontend; implement CST-to-private-AST lowering rather than a replacement
+lexer/parser.
+
+```bash
+python3 scripts/build.py verify {{IMPL_CRATE}}
+python3 scripts/build.py benchmark {{IMPL_CRATE}} --min-pass-rate 0
+python3 scripts/build.py system-benchmark {{IMPL_CRATE}} \
+  --design metagdb_src/implementation/generated/{{IMPL_CRATE}}/.synthesis/design_vector.json \
+  --diagnostic
+# Repair both reports, then require the language threshold and every system case:
+python3 scripts/build.py benchmark {{IMPL_CRATE}}
+python3 scripts/build.py system-benchmark {{IMPL_CRATE}} \
+  --design metagdb_src/implementation/generated/{{IMPL_CRATE}}/.synthesis/design_vector.json
+```

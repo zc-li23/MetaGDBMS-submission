@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "candidate": {
+    "crate_name": "metagdb_financial_demo",
+    "description": "A strict, crash-safe GQL graph database for financial point queries and controlled traversal"
+  },
+  "language": "GQL",
+  "schema": {
+    "mode": "strict",
+    "vertex_labels": ["Account", "Customer"],
+    "edge_types": ["OWNS", "TRANSFER"],
+    "property_keys": ["name", "amount", "timestamp"]
+  },
+  "graph": {"topology": {"uniform_regular": 0.3, "power_law_social": 0.7}},
+  "workload": {
+    "point_read": "critical",
+    "traversal": "high",
+    "write": "medium",
+    "recovery": "critical",
+    "schema_rigidity": "critical"
+  },
+  "correctness": {"isolation_level": "serializable", "crash_safe": true},
+  "algorithms": [
+    {
+      "name": "fraud_ring",
+      "description": "Find strongly connected transfer rings satisfying the user-defined amount and time-window constraints"
+    }
+  ],
+  "capabilities": {
+    "required": ["reject records that violate the declared financial schema"],
+    "optional": ["distributed execution"]
+  }
+}

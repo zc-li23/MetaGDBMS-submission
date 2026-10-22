@@ -1,0 +1,19 @@
+# Standalone crate: it declares its own [workspace] so the repository's Cargo
+# workspace (which activates exactly one language crate at a time) is untouched.
+[package]
+name = "metagdb_benchmark_syntax_check"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[[bin]]
+name = "syntax-check"
+path = "src/main.rs"
+
+[dependencies]
+antlr4rust = "0.5.2"
+metagdb_cypher_antlr  = { path = "../../metagdb_src/implementation/language/Cypher" }
+metagdb_gql_antlr     = { path = "../../metagdb_src/implementation/language/GQL" }
+metagdb_gremlin_antlr = { path = "../../metagdb_src/implementation/language/Gremlin" }
+
+[workspace]
