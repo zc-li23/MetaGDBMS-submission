@@ -1,0 +1,9 @@
+# metaGDB implementation manifest
+#
+# Field description:
+#   active: name of the currently active implementation crate (must match the directory name under implementation/<crate>).
+#
+# Team default is tracked in this file; for personal overrides, create manifest.local.toml
+# in the same directory (gitignored). The script reads the local version first.
+
+active = "metagdb_default"

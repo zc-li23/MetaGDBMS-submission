@@ -1,0 +1,210 @@
+{
+  "profile": "metagdb-core-language-profile",
+  "version": "2.0",
+  "language": "cypher",
+  "cases": 394,
+  "scored_cases": 392,
+  "negative_cases": 12,
+  "postcondition_cases": 31,
+  "cases_with_setup": 0,
+  "query_templates": 359,
+  "exact_duplicate_queries": 0,
+  "repeated_templates": 29,
+  "largest_template_group": 3,
+  "category_distribution": {
+    "error": 12,
+    "mutation.create": 7,
+    "mutation.delete": 3,
+    "mutation.merge": 4,
+    "mutation.postcondition": 7,
+    "mutation.update": 10,
+    "olap.algorithm": 2,
+    "read.access": 35,
+    "read.advanced.quantifier": 14,
+    "read.advanced.temporal": 12,
+    "read.aggregation": 34,
+    "read.collection": 31,
+    "read.composition": 29,
+    "read.filter": 38,
+    "read.function": 36,
+    "read.navigation": 37,
+    "read.ordering": 27,
+    "read.path": 27,
+    "read.projection": 29
+  },
+  "feature_count": 100,
+  "feature_distribution": {
+    "agg.avg": 5,
+    "agg.collect": 18,
+    "agg.count": 42,
+    "agg.grouping": 12,
+    "agg.max": 4,
+    "agg.min": 4,
+    "agg.sum": 9,
+    "clause.basic": 1,
+    "clause.create": 8,
+    "clause.delete": 6,
+    "clause.limit": 11,
+    "clause.match": 51,
+    "clause.merge": 5,
+    "clause.orderBy": 31,
+    "clause.remove": 3,
+    "clause.return": 1,
+    "clause.set": 14,
+    "clause.skip": 5,
+    "clause.union": 5,
+    "clause.unwind": 13,
+    "clause.where": 39,
+    "clause.with": 18,
+    "expression.arithmetic": 11,
+    "expression.case": 2,
+    "expression.comparison": 2,
+    "expression.listComprehension": 4,
+    "expression.listConcat": 2,
+    "expression.listIndex": 7,
+    "expression.listLiteral": 2,
+    "expression.listSlice": 3,
+    "expression.mapLiteral": 1,
+    "filter.null": 6,
+    "function.abs": 3,
+    "function.ceil": 1,
+    "function.coalesce": 3,
+    "function.exists": 3,
+    "function.floor": 1,
+    "function.head": 2,
+    "function.id": 1,
+    "function.keys": 1,
+    "function.labels": 5,
+    "function.last": 1,
+    "function.left": 1,
+    "function.length": 4,
+    "function.nodes": 5,
+    "function.properties": 2,
+    "function.range": 5,
+    "function.relationships": 2,
+    "function.replace": 1,
+    "function.reverse": 2,
+    "function.right": 1,
+    "function.round": 1,
+    "function.sign": 1,
+    "function.size": 15,
+    "function.split": 2,
+    "function.sqrt": 1,
+    "function.substring": 2,
+    "function.tail": 1,
+    "function.toBoolean": 1,
+    "function.toFloat": 2,
+    "function.toInteger": 3,
+    "function.toLower": 2,
+    "function.toString": 7,
+    "function.toUpper": 2,
+    "function.trim": 1,
+    "function.type": 4,
+    "olap.call": 2,
+    "operator.and": 6,
+    "operator.contains": 3,
+    "operator.endsWith": 2,
+    "operator.eq": 1,
+    "operator.ge": 1,
+    "operator.gt": 2,
+    "operator.in": 4,
+    "operator.le": 1,
+    "operator.lt": 3,
+    "operator.ne": 1,
+    "operator.not": 5,
+    "operator.or": 4,
+    "operator.startsWith": 2,
+    "pattern.directedIn": 5,
+    "pattern.directedOut": 9,
+    "pattern.multiHop": 6,
+    "pattern.pathVariable": 5,
+    "pattern.relationship": 1,
+    "pattern.relationshipType": 9,
+    "pattern.variableLength": 19,
+    "projection.alias": 8,
+    "projection.distinct": 10,
+    "projection.property": 16,
+    "quantifier.all": 4,
+    "quantifier.any": 4,
+    "quantifier.none": 3,
+    "quantifier.single": 3,
+    "relationship.property": 1,
+    "temporal.accessor": 3,
+    "temporal.date": 7,
+    "temporal.datetime": 2,
+    "temporal.duration": 2,
+    "temporal.time": 1
+  },
+  "source_distribution": {
+    "project": 394
+  },
+  "fixture_distribution": {
+    "empty": 12,
+    "social9": 382
+  },
+  "categories": {
+    "read.access": [
+      "V/E sources, label, id and property access"
+    ],
+    "read.filter": [
+      "predicates, boolean composition, null handling"
+    ],
+    "read.navigation": [
+      "edge traversal in both directions and multi-hop"
+    ],
+    "read.projection": [
+      "value shaping, maps, property elements"
+    ],
+    "read.aggregation": [
+      "count/sum/min/max/mean/group and DISTINCT"
+    ],
+    "read.ordering": [
+      "ordering, pagination, dedup and range selection"
+    ],
+    "read.path": [
+      "path values, path predicates and variable-length walks"
+    ],
+    "read.composition": [
+      "UNION/UNWIND/WITH/union/branch step composition"
+    ],
+    "read.collection": [
+      "fold/unfold/collect and list manipulation"
+    ],
+    "read.function": [
+      "string, numeric, list and type conversion functions"
+    ],
+    "read.advanced.temporal": [
+      "date/time/duration values (advanced capability)"
+    ],
+    "read.advanced.quantifier": [
+      "quantified path patterns (advanced capability)"
+    ],
+    "mutation.create": [
+      "node/vertex and relationship/edge creation"
+    ],
+    "mutation.update": [
+      "property and label modification"
+    ],
+    "mutation.delete": [
+      "element and property removal"
+    ],
+    "mutation.merge": [
+      "upsert / merge semantics"
+    ],
+    "mutation.postcondition": [
+      "mutation verified through a follow-up read"
+    ],
+    "error": [
+      "statements that must be rejected with a specific failure class"
+    ],
+    "olap.algorithm": [
+      "language-level entry point of a registered OLAP algorithm"
+    ]
+  },
+  "limitations": [
+    "Expectations are derived from the shared fixture model and remain directly reviewable. They have not been independently differential-tested against a third-party openCypher engine, unlike the Gremlin cases carried over from TinkerPop.",
+    "Element ids are insertion ordinals; see the Gremlin note.",
+    "Temporal and quantified-path cases assert boolean or scalar outcomes only, because the framework result model carries no date/time value type.",
+    "The vendored Cypher.g4 requires no space after the comma between SET items (`SET a = 1,b = 2`); valid openCypher with a space is rejected by the grammar. The profile uses the accepted spelling and benchmark/syntax_check records the quirk."
+  ]
+}

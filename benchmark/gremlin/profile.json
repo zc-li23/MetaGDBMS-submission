@@ -1,0 +1,214 @@
+{
+  "profile": "metagdb-core-language-profile",
+  "version": "2.0",
+  "language": "gremlin",
+  "cases": 515,
+  "scored_cases": 512,
+  "negative_cases": 12,
+  "postcondition_cases": 33,
+  "cases_with_setup": 0,
+  "query_templates": 411,
+  "exact_duplicate_queries": 0,
+  "repeated_templates": 72,
+  "largest_template_group": 3,
+  "category_distribution": {
+    "error": 12,
+    "mutation.create": 9,
+    "mutation.delete": 7,
+    "mutation.merge": 2,
+    "mutation.postcondition": 6,
+    "mutation.update": 9,
+    "olap.algorithm": 3,
+    "read.access": 67,
+    "read.aggregation": 91,
+    "read.collection": 42,
+    "read.composition": 31,
+    "read.filter": 50,
+    "read.function": 36,
+    "read.navigation": 58,
+    "read.ordering": 41,
+    "read.path": 26,
+    "read.projection": 25
+  },
+  "feature_count": 107,
+  "feature_distribution": {
+    "agg.count": 161,
+    "agg.group": 6,
+    "agg.groupCount": 5,
+    "agg.max": 9,
+    "agg.mean": 8,
+    "agg.min": 10,
+    "agg.sum": 14,
+    "branch.choose": 7,
+    "branch.coalesce": 8,
+    "branch.local": 6,
+    "branch.optional": 6,
+    "branch.union": 14,
+    "crud.addE": 4,
+    "crud.addV": 6,
+    "crud.drop": 10,
+    "crud.mergeE": 1,
+    "crud.mergeV": 2,
+    "crud.property": 13,
+    "filter.and": 2,
+    "filter.filter": 2,
+    "filter.is": 15,
+    "filter.not": 4,
+    "filter.or": 2,
+    "filter.where": 7,
+    "function.convert.asNumber": 1,
+    "function.convert.asString": 3,
+    "function.numeric.math": 3,
+    "function.string.concat": 4,
+    "function.string.lTrim": 1,
+    "function.string.length": 6,
+    "function.string.rTrim": 1,
+    "function.string.replace": 1,
+    "function.string.reverse": 3,
+    "function.string.split": 2,
+    "function.string.substring": 4,
+    "function.string.toLower": 3,
+    "function.string.toUpper": 3,
+    "function.string.trim": 1,
+    "modulator.by": 36,
+    "modulator.order": 5,
+    "nav.both": 11,
+    "nav.bothE": 7,
+    "nav.bothV": 1,
+    "nav.in": 13,
+    "nav.inE": 8,
+    "nav.inV": 4,
+    "nav.otherV": 5,
+    "nav.out": 56,
+    "nav.outE": 15,
+    "nav.outV": 5,
+    "olap.connectedComponent": 1,
+    "olap.pageRank": 1,
+    "olap.peerPressure": 1,
+    "path.cyclicPath": 3,
+    "path.path": 18,
+    "path.simplePath": 6,
+    "predicate.between": 3,
+    "predicate.containing": 2,
+    "predicate.endingWith": 2,
+    "predicate.eq": 2,
+    "predicate.gt": 14,
+    "predicate.gte": 8,
+    "predicate.inside": 2,
+    "predicate.lt": 8,
+    "predicate.lte": 4,
+    "predicate.neq": 4,
+    "predicate.outside": 2,
+    "predicate.startingWith": 3,
+    "predicate.within": 9,
+    "predicate.without": 5,
+    "repeat.emit": 4,
+    "repeat.loops": 2,
+    "repeat.repeat": 22,
+    "repeat.times": 12,
+    "repeat.until": 3,
+    "sideeffect.aggregate": 4,
+    "sideeffect.cap": 5,
+    "source.vertices": 1,
+    "step.as": 12,
+    "step.basic": 2,
+    "step.constant": 7,
+    "step.dedup": 35,
+    "step.element": 2,
+    "step.elementMap": 6,
+    "step.fold": 30,
+    "step.has": 157,
+    "step.hasId": 1,
+    "step.hasKey": 1,
+    "step.hasLabel": 89,
+    "step.hasNot": 5,
+    "step.hasValue": 2,
+    "step.id": 5,
+    "step.identity": 1,
+    "step.key": 3,
+    "step.label": 4,
+    "step.limit": 9,
+    "step.order": 46,
+    "step.project": 4,
+    "step.properties": 9,
+    "step.range": 6,
+    "step.select": 11,
+    "step.skip": 5,
+    "step.tail": 6,
+    "step.unfold": 10,
+    "step.value": 3,
+    "step.valueMap": 7,
+    "step.values": 186
+  },
+  "source_distribution": {
+    "project": 345,
+    "tinkergraph": 170
+  },
+  "fixture_distribution": {
+    "social6": 170,
+    "social9": 345
+  },
+  "categories": {
+    "read.access": [
+      "V/E sources, label, id and property access"
+    ],
+    "read.filter": [
+      "predicates, boolean composition, null handling"
+    ],
+    "read.navigation": [
+      "edge traversal in both directions and multi-hop"
+    ],
+    "read.projection": [
+      "value shaping, maps, property elements"
+    ],
+    "read.aggregation": [
+      "count/sum/min/max/mean/group and DISTINCT"
+    ],
+    "read.ordering": [
+      "ordering, pagination, dedup and range selection"
+    ],
+    "read.path": [
+      "path values, path predicates and variable-length walks"
+    ],
+    "read.composition": [
+      "UNION/UNWIND/WITH/union/branch step composition"
+    ],
+    "read.collection": [
+      "fold/unfold/collect and list manipulation"
+    ],
+    "read.function": [
+      "string, numeric, list and type conversion functions"
+    ],
+    "read.advanced.temporal": [
+      "date/time/duration values (advanced capability)"
+    ],
+    "read.advanced.quantifier": [
+      "quantified path patterns (advanced capability)"
+    ],
+    "mutation.create": [
+      "node/vertex and relationship/edge creation"
+    ],
+    "mutation.update": [
+      "property and label modification"
+    ],
+    "mutation.delete": [
+      "element and property removal"
+    ],
+    "mutation.merge": [
+      "upsert / merge semantics"
+    ],
+    "mutation.postcondition": [
+      "mutation verified through a follow-up read"
+    ],
+    "error": [
+      "statements that must be rejected with a specific failure class"
+    ],
+    "olap.algorithm": [
+      "language-level entry point of a registered OLAP algorithm"
+    ]
+  },
+  "limitations": [
+    "Element ids are the fixture's insertion ordinals. Cases that assert or reference an id therefore assume a store that assigns small sequential ids to a freshly created database, the same assumption Benchmark v1 made.",
+    "OLAP cases assert only that the algorithm step is reachable from the language and emits one result per input vertex; algorithm correctness is measured by the system algorithm benchmark, not here."
+  ]
+}

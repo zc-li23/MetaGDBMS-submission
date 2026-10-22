@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "candidate": {
+    "crate_name": "metagdb_gremlin_disk",
+    "description": "A schemaless, disk-persistent property graph database for Gremlin"
+  },
+  "language": {
+    "name": "Gremlin",
+    "grammar_path": "data/language/Gremlin.g4"
+  },
+  "schema": {
+    "mode": "schemaless",
+    "vertex_labels": [],
+    "edge_types": [],
+    "property_keys": []
+  },
+  "storage": {
+    "medium": "local disk",
+    "layout": "append-only vertex and edge records with adjacency lists",
+    "indexes": ["vertex id", "edge id", "out adjacency", "in adjacency"],
+    "persistence": "committed data survives process restart",
+    "recovery": "write-ahead log replay with incomplete transactions discarded"
+  },
+  "transactions": {
+    "atomicity_scope": "multi_operation_transaction",
+    "concurrency_control": "mvcc",
+    "isolation_level": "snapshot_isolation",
+    "durability": "crash_safe"
+  },
+  "execution": {"model": "volcano"},
+  "algorithms": {
+    "required": [
+      {
+        "name": "bfs",
+        "description": "Return every vertex reachable from a source together with its minimum hop distance",
+        "performance_weight": 1.0
+      }
+    ]
+  },
+  "capabilities": {
+    "required": [
+      "execute the common Gremlin traversal semantics represented by the fixed benchmark",
+      "vertex and edge creation, lookup, filtering, traversal, projection, aggregation, ordering, and path results",
+      "stable result encoding through the public runtime",
+      "persistent reopen without data loss"
+    ],
+    "optional": ["advanced OLAP graph-computer steps outside the fixed benchmark"],
+    "unsupported_behavior": "return a precise unsupported error; never silently return an empty or fabricated result"
+  },
+  "quality": {
+    "benchmark_min_pass_rate": 0.9,
+    "system_benchmark_required": true,
+    "required_tests": [
+      "parser and lowering tests",
+      "storage restart test",
+      "transaction visibility test",
+      "fixed ACID system benchmark",
+      "abrupt-process crash recovery test",
+      "public-runtime semantic integration tests",
+      "self-checking end-to-end demo"
+    ],
+    "zero_compiler_warnings": true
+  },
+  "performance": {
+    "profile": "point_read_optimized",
+    "threads": 1,
+    "datasets": ["uniform_smoke", "uniform_standard", "rn", "yt"],
+    "dataset_weights": {
+      "uniform_smoke": 0.05,
+      "uniform_standard": 0.15,
+      "rn": 0.20,
+      "yt": 0.60
+    },
+    "cache_modes": ["warm", "reopen"],
+    "repeat": 5,
+    "max_optimization_iterations": 12,
+    "no_improvement_patience": 3,
+    "topology_downside_penalty": 1.0,
+    "workload": {
+      "storage_import": 0.00,
+      "storage_vertex_point_read": 0.20,
+      "storage_edge_point_read": 0.10,
+      "storage_out_adjacency": 0.10,
+      "storage_hotspot_out_adjacency": 0.10,
+      "storage_scan": 0.05,
+      "storage_reopen": 0.00,
+      "storage_disk_size": 0.00,
+      "query_point_read": 0.20,
+      "query_one_hop": 0.10,
+      "transaction_commit": 0.05,
+      "algorithm_projection_build": 0.00,
+      "algorithm_kernel": 0.05,
+      "algorithm_e2e": 0.05
+    },
+    "primary_metrics": ["storage.vertex_point_read.p95", "query.point_read.p95"],
+    "guardrails": {
+      "other_latency_regression_max": 1.20,
+      "weighted_latency_regression_max": 2.00,
+      "unweighted_latency_regression_max": 5.00,
+      "disk_size_regression_max": 1.30,
+      "reopen_time_regression_max": 1.30,
+      "minimum_primary_improvement": 0.03,
+      "minimum_overall_ratio": 1.00,
+      "minimum_topology_robust_gain": 0.00
+    },
+    "absolute_targets": {}
+  },
+  "boundaries": {
+    "allow_framework_changes": false,
+    "allow_benchmark_changes": false,
+    "allow_grammar_changes": false
+  },
+  "budget": {"max_fix_iterations": 0}
+}
